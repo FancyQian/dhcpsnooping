@@ -1,0 +1,17 @@
+#!/bin/sh /etc/rc.common
+# 2016 Hitron Technologies Inc.
+
+START=21
+STOP=50
+
+start() {
+	while [ -z `ifconfig br-lan` ]
+	do
+	sleep 1
+	done
+	/usr/bin/dhcpsnoopd &
+}
+
+stop() {
+	killall -9 dhcpsnoopd
+}
